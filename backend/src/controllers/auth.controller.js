@@ -22,9 +22,9 @@ export const signup = async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({ fullName, email, password: hashedPassword });
         if (newUser) {
-            generateToken(newUser._id, res);
-            await newUser.save();
-            return res.status(201).json({ _id: newUser._id, fullName: newUser.fullName, email: newUser.email, profilePic: newUser.profilePic, message: 'User registered successfully' });
+            const savedUser = await newUser.save();
+            generateToken(savedUser._id, res);
+            return res.status(201).json({ _id: savedUser._id, fullName: savedUser.fullName, email: savedUser.email, profilePic: savedUser.profilePic, message: 'User registered successfully' });
         }
         else {
             res.status(400).json({ message: 'Invalid user data' });
