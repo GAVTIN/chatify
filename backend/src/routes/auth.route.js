@@ -1,21 +1,13 @@
 import express from 'express';
+import { signup, login, logout } from '../controllers/auth.controller.js';
 
 const router = express.Router();
 
 // Signup route
-router.get('/signup', (req, res) => {
-    // Handle user signup logic here
-    res.send('Signup endpoint');
-});
+router.get('/signup', signup);
 // Login route
-router.get('/login', (req, res) => {
-    // Handle user login logic here
-    res.send('Login endpoint');
-});
+router.get('/login', login);
 // Logout route
-router.get('/logout', (req, res) => {
-    // Handle user logout logic here
-    res.send('Logout endpoint');
-});
+router.get('/logout', logout);
 
 export default router;
